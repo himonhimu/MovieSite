@@ -1,0 +1,330 @@
+{
+	"info": {
+		"_postman_id": "1914400f-000e-4f62-b2cb-a2389b4b19d6",
+		"name": "moveisite",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "admin-user",
+			"item": [
+				{
+					"name": "save admin user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:3050/admin_user/add"
+					},
+					"response": []
+				},
+				{
+					"name": "login-admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_name",
+									"value": "himonhimu",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "default"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": "http://localhost:3050/admin_user/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "save user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_name",
+									"value": "himon_3",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "default"
+								},
+								{
+									"key": "role",
+									"value": "2",
+									"type": "default"
+								},
+								{
+									"key": "name",
+									"value": "himon",
+									"type": "default"
+								},
+								{
+									"key": "dob",
+									"value": "01-01-1990",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "himon_m@hotmail.com",
+									"type": "default"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": "http://localhost:3050/user/add"
+					},
+					"response": []
+				},
+				{
+					"name": "login-user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_name",
+									"value": "mobin_m",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "default"
+								}
+							]
+						},
+						"url": "http://localhost:3050/user/login"
+					},
+					"response": []
+				},
+				{
+					"name": "update-user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_name",
+									"value": "mobin_m",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "mobin",
+									"type": "default"
+								}
+							]
+						},
+						"url": "http://localhost:3050/user/64a7edbe832d1c2e91693a05"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movie",
+			"item": [
+				{
+					"name": "update movie",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Inception 2\",\r\n  \"release_date\": \"2010-07-12\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3050/movie/64a7f2b2344500a7d936ad9c"
+					},
+					"response": []
+				},
+				{
+					"name": "delete movie",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Inception 2\",\r\n  \"release_date\": \"2010-07-12\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3050/movie/64a7f2b2344500a7d936ad9c"
+					},
+					"response": []
+				},
+				{
+					"name": "add movie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJtb2Jpbl9tIiwibmFtZSI6Im1vYmluIiwicm9sZSI6MiwiaWF0IjoxNjg4NzMxNjc3fQ.0aw1Gr9v5vVRzRhQifcIX1OSjpLsLtKvpRafofV1WAs"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Inception\",\r\n  \"release_date\": \"2010-07-16\",\r\n  \"duration\": 148,\r\n  \"director\": \"Christopher Nolan\",\r\n  \"genre\": \"Sci-Fi\",\r\n  \"actor_names\": [\"Leonardo DiCaprio\", \"Joseph Gordon-Levitt\", \"Ellen Page\"],\r\n  \"poster_link\": \"https://example.com/posters/inception.jpg\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3050/movie/add"
+					},
+					"response": []
+				},
+				{
+					"name": "upload csv",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJtb2Jpbl9tIiwibmFtZSI6Im1vYmluIiwicm9sZSI6MiwiaWF0IjoxNjg4NzMxNjc3fQ.0aw1Gr9v5vVRzRhQifcIX1OSjpLsLtKvpRafofV1WAs"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "csvfile",
+									"type": "file",
+									"src": "/C:/Users/himon/Desktop/Mail or send/result.csv"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3050/movie/upload-csv"
+					},
+					"response": []
+				},
+				{
+					"name": "get all movie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3050/movie/all"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ratting",
+			"item": [
+				{
+					"name": "add ratting",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJtb2Jpbl9tIiwibmFtZSI6Im1vYmluIiwicm9sZSI6MiwiaWF0IjoxNjg4NzMxNjc3fQ.0aw1Gr9v5vVRzRhQifcIX1OSjpLsLtKvpRafofV1WAs"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"movie_id\": \"64a7f285344500a7d936ad9a\",\r\n  \"user_id\": \"64a7fb16b3ff8f3823d53718\",\r\n  \"rating_value\": 3,\r\n  \"review\": \"I really enjoyed this movie. The acting was superb, and the plot kept me on the edge of my seat.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3050/ratting/add"
+					},
+					"response": []
+				},
+				{
+					"name": "get all ratting",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3050/ratting/all"
+					},
+					"response": []
+				},
+				{
+					"name": "get selected-movie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3050/ratting/select-movie/64a7f48924a1a8f308d65d90"
+					},
+					"response": []
+				},
+				{
+					"name": "avarage ratting",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3050/ratting/avarage-ratting/64a7f48924a1a8f308d65d90"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Home api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3050"
+			},
+			"response": []
+		}
+	]
+}
