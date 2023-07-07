@@ -1,6 +1,10 @@
 const MovieSchema = require('../model/MovieModel')
 const jwt = require('jsonwebtoken')
 const AdminUserController = require('./AdminUserController')
+const fs = require('fs');
+const csv = require('csv-parser');
+const multer = require('multer');
+const UploadCSVFile = require('../config/UploadCSVFile');
 
 class MovieController {
 
@@ -67,6 +71,34 @@ class MovieController {
         }
     }
 
+
+    static readCSVfile = async (req, res) => {
+        try {
+         let results =   await UploadCSVFile.UploadCSVFile(req)
+         let finalArray = []
+         results.forEach(element => {
+            const actorNames = [];
+            Object.keys(element).forEach(function (key) {
+                if (key.includes('actor_names')) {
+                    actorNames.push(element[key])
+                    delete element[key]
+                }
+              });
+             element = {
+                ...element,
+                actor_names:actorNames
+             }
+             finalArray.push(element)
+         });
+        
+          let mresult =  await  MovieSchema.insertMany(finalArray)
+           res.send(mresult)
+        } catch (error) {
+            res.status(500).send(error.message)
+        }
+    }
+
 }
+
 
 module.exports = MovieController
