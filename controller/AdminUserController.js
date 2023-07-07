@@ -4,7 +4,6 @@ const AdminUserSchema = require('../model/AdminUserModel')
 class AdminUserController {
 
     static createAdminUser = async (req, res) => {
-        // res.send('hello')
         try {
             const newUser = new AdminUserSchema({
                 user_name: req.body.user_name,

@@ -4,7 +4,6 @@ const UserSchema = require('../model/UserModel')
 class UserController {
 
     static createUser = async (req, res) => {
-        // res.send('hello')
         try {
             const newUser = new UserSchema({
                 user_name: req.body.user_name,
@@ -38,25 +37,6 @@ class UserController {
             res.status(500).send(error.message)
         }
     }
-    static UserFindOne = async (req, res) => {
-        try {
-            let id = req.params.id
-            let user = await UserSchema.findOne({ '_id': id })
-            res.status(200).send(user)
-            // res.send('find one user')
-        } catch (error) {
-            res.status(500).send(error.message)
-        }
-    }
-
-    static UserFindAll = async (req, res) => {
-        try {
-            let user = await UserSchema.find()
-            res.status(200).send(user)
-        } catch (error) {
-            res.status(500).send(error.message)
-        }
-    }
 
     static updateUser = async (req, res) => {
         try {
@@ -68,17 +48,6 @@ class UserController {
             user.email = req.body.email || user.email
             await user.save()
             res.status(200).send(user)
-        } catch (error) {
-            res.status(500).send(error.message)
-        }
-
-    }
-    static deleteAdminUser = async (req, res) => {
-        try {
-            let id = req.params.id
-            await AdminUserSchema.deleteOne({ '_id': id })
-            res.status(200).send('user deleted successfully')
-            // res.send('find one user')
         } catch (error) {
             res.status(500).send(error.message)
         }
