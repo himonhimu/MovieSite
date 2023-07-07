@@ -36,32 +36,13 @@ class AdminUserController {
             res.status(500).send(error.message)
         }
     }
-    static adminUserFindOne = async (req, res) => {
-        try {
-            let id = req.params.id
-            let user = await AdminUserSchema.findOne({ '_id': id })
-            res.status(200).send(user)
-            // res.send('find one user')
-        } catch (error) {
-            res.status(500).send(error.message)
-        }
-    }
 
-    static adminUserFindAll = async (req, res) => {
-        try {
-            let user = await AdminUserSchema.find()
-            res.status(200).send(user)
-        } catch (error) {
-            res.status(500).send(error.message)
-        }
-    }
     static updateAdminUser = async (req, res) => {
         try {
             let id = req.params.id
             let user = await AdminUserSchema.findOne({ '_id': id })
-            user.name = req.body.name
-            user.age = req.body.age
-            user.address = req.body.address
+            user.name = req.body.name || user.name
+            user.password = req.body.password ? await EncryptDecrypt.encrypt(req.body.password) : user.password
             await user.save()
             res.status(200).send(user)
         } catch (error) {
@@ -69,16 +50,7 @@ class AdminUserController {
         }
 
     }
-    static deleteAdminUser = async (req, res) => {
-        try {
-            let id = req.params.id
-            await AdminUserSchema.deleteOne({ '_id': id })
-            res.status(200).send('user deleted successfully')
-            // res.send('find one user')
-        } catch (error) {
-            res.status(500).send(error.message)
-        }
-    }
+
 }
 
 module.exports = AdminUserController

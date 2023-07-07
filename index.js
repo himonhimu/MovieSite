@@ -3,10 +3,12 @@
 const express = require("express");
 const connectDB = require("./config/config");
 const AdminUserRouter = require("./router/AdminUserRoute");
+const UserRouter = require("./router/UserRoute");
 require('dotenv').config()
 
 const app = express();
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({
     extended: false
@@ -23,3 +25,4 @@ app.get('/', (req, res)=>{
 })
 
 app.use('/admin_user', AdminUserRouter)
+app.use('/user', UserRouter)
