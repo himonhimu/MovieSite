@@ -4,11 +4,11 @@ const express = require("express");
 const connectDB = require("./config/config");
 require('dotenv').config()
 const app = express();
-
+var bodyParser = require('body-parser');
 const AdminUserRouter = require("./router/AdminUserRoute");
 const UserRouter = require("./router/UserRoute");
-var bodyParser = require('body-parser');
 const MovieRouter = require("./router/MovieRoute");
+const RattingRouter = require("./router/RattingRoute");
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({
@@ -28,3 +28,4 @@ app.get('/', (req, res)=>{
 app.use('/admin_user', AdminUserRouter)
 app.use('/user', UserRouter)
 app.use('/movie', MovieRouter)
+app.use('/ratting', RattingRouter)

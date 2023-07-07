@@ -1,4 +1,6 @@
 const MovieSchema = require('../model/MovieModel')
+const jwt = require('jsonwebtoken')
+const AdminUserController = require('./AdminUserController')
 
 class MovieController {
 
@@ -13,8 +15,14 @@ class MovieController {
                 actor_names: req.body.actor_names,
                 poster_link: req.body.poster_link,
             })
-            await newMovie.save()
-            res.status(201).json(newMovie)
+           let isExist =  await AdminUserController.checkAdminExist(req.user.user_name)
+            console.log(isExist);
+            if (isExist) {
+                res.status(201).json(newMovie)
+            }else{
+                res.sendStatus(403)
+            }
+            
         } catch (error) {
             res.send({ message: error.message })
         }

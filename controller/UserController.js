@@ -1,8 +1,7 @@
 const EncryptDecrypt = require('../config/encryptDecrypt');
 const UserSchema = require('../model/UserModel')
-
+const jwt = require('jsonwebtoken')
 class UserController {
-
     static createUser = async (req, res) => {
         try {
             const newUser = new UserSchema({
@@ -19,6 +18,17 @@ class UserController {
             res.send({ message: error.message })
         }
     }
+
+    static checkUserExist = async (user_name) => {
+        try {         
+            let user = await UserSchema.findOne({ user_name: user_name })
+            if (!user) return 0
+            return 1
+            
+        } catch (error) {
+        }
+    }
+
     static UserLogin = async (req, res) => {
         try {
             let user_name = req.body.user_name
@@ -29,7 +39,9 @@ class UserController {
                 isMatch = await EncryptDecrypt.matchPassword(password, user.password)
             }
             if (isMatch) {
-                res.status(200).send(user)
+                const datatoSend = {user_name:user_name, name:user.name, role:user.role}
+                 const accessToken = jwt.sign(datatoSend, process.env.ACCESS_TOKEN)
+                res.send({accessToken:accessToken})
             } else {
                 res.send({ message: 'user name or password is incorrect' })
             }

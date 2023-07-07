@@ -1,6 +1,6 @@
 const EncryptDecrypt = require('../config/encryptDecrypt');
 const AdminUserSchema = require('../model/AdminUserModel')
-
+const jwt = require('jsonwebtoken')
 class AdminUserController {
 
     static createAdminUser = async (req, res) => {
@@ -17,6 +17,15 @@ class AdminUserController {
             res.send({ message: error.message })
         }
     }
+    static checkAdminExist = async (user_name) => {
+        try {         
+            let user = await AdminUserSchema.findOne({ user_name: user_name })
+            if (!user) return 0
+            return 1
+            
+        } catch (error) {
+        }
+    }
     static adminUserLogin = async (req, res) => {
         try {
             let user_name = req.body.user_name
@@ -27,7 +36,9 @@ class AdminUserController {
                 isMatch = await EncryptDecrypt.matchPassword(password, user.password)
             }
             if (isMatch) {
-                res.status(200).send(user)
+                const datatoSend = {user_name:user_name, name:user.name, role:user.role}
+                 const accessToken = jwt.sign(datatoSend, process.env.ACCESS_TOKEN)
+                res.send({accessToken:accessToken})
             } else {
                 res.send({ message: 'user name or password is incorrect' })
             }
